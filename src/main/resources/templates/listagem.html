@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-br"
+	  xmlns="http//www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+  <head>
+    <title>Lista</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+  </head>
+  
+  <section layout:fragment="content">
+  
+  	<div class="card card-margin-top">
+        <h4 class="card-header">Lista de Postos</h4>
+        <div class="card-body">
+        
+        <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+			<span th:text="${mensagem}"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	 			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Preço Gasolina</th>
+                <th scope="col">Preço Etanol</th>
+                <th scope="col" class="text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="posto : ${postosList}">
+                <th scope="row" th:text="${posto.id}"></th>
+                <td th:text="${posto.nome}"></td>
+                <td th:text="${posto.endereco}"></td>
+                <td th:text="|R$ ${{posto.precoGasolina}}|"></td>
+                <td th:text="|R$ ${{posto.precoEtanol}}|"></td>
+                <th class="text-center">
+                  <a class="btn-action-list" th:href="@{/postos/{id}(id=${posto.id})}" data-toggle="tooltip" title="Editar">
+                    <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                  </a>
+                  <a href="#" class="text-danger btn-action-list" title="Excluir" data-toggle="modal" data-target="#modalExcluirPosto" th:attr="data-codigo=${posto.id}">
+                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                  </a>
+                </th>
+              </tr>
+	          <tr th:if="${#lists.isEmpty(postosList)}">
+				<td colspan="6">Não foram escontrados registros.</td>
+			  </tr>
+            </tbody>
+          </table>
+
+        </div>
+     </div>
+     
+     <div layout:include="modalExclusao"></div>
+  	
+  </section>
+  
+</html>  

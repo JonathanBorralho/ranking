@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-br"
+	  xmlns="http//www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+  <head>
+    <title>Cadastro</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+  </head>
+  
+  <section layout:fragment="content">
+  	
+  	<div class="card card-margin-top">
+        <h4 class="card-header">Cadastro de Postos</h4>
+        <div class="card-body">
+
+            <form th:object="${posto}" method="POST" th:action="@{/postos}">
+            
+            	<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+  					<div th:each="e : ${#fields.detailedErrors()}">
+  						<span th:text="${e.message}"></span>
+  					</div>
+				</div>
+
+				<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+					<span th:text="${mensagem}"></span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+  					</button>
+				</div>
+
+				<input type="hidden" th:field="*{id}" />
+				
+                <div class="form-group row">
+                    <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="nome" placeholder="Nome" th:field="*{nome}" th:errorclass="is-invalid" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="endereco" class="col-sm-2 col-form-label">Endereço</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="endereco" placeholder="Endereço" th:field="*{endereco}" th:errorclass="is-invalid" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="precoGasolina" class="col-sm-2 col-form-label">Preço da Gasolina</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control js-moneymask" id="precoGasolina" placeholder="Preço da Gasolina" th:field="*{precoGasolina}" th:errorclass="is-invalid" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="precoEtanol" class="col-sm-2 col-form-label">Preço do Etanol</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control js-moneymask" id="precoEtanol" placeholder="Preço do Etanol" th:field="*{precoEtanol}" th:errorclass="is-invalid" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 offset-md-2">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+  	</div>
+  </section>
+  
+</html>  

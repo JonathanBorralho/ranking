@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-br"
+	  xmlns="http//www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+  <head>
+    <title>Ranking</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+  </head>
+  
+	<section layout:fragment="content">
+      <div class="card card-margin-top">
+        <h4 class="card-header">Ranking de Postos</h4>
+        <div class="card-body">
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Pos.</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Preço Gasolina</th>
+                <th scope="col">Preço Etanol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="posto : ${postosRankingList}">
+                <th scope="row" th:text="|${postoStat.count}º|"></th>
+                <td th:text="${posto.nome}"></td>
+                <td th:text="${posto.endereco}"></td>
+                <td th:text="|R$ ${{posto.precoGasolina}}|"></td>
+                <td th:text="|R$ ${{posto.precoEtanol}}|"></td>
+              </tr>
+              <tr th:if="${#lists.isEmpty(postosRankingList)}">
+				<td colspan="6">Não foram escontrados registros.</td>
+			  </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+     </section> 
+</html>
