@@ -5,3 +5,8 @@
 .btn-action-list {
 	padding: 5px;
 }
+
+#userGreeting {
+	margin-right: 25px;
+	color: white;
+}
